@@ -2,74 +2,23 @@
 // import logo from './logo.svg';
 
 import React, {Component} from 'react';
-import{BrowserRouter as Router, Route} from 'react-router-dom';
+import{BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './App.css';
-import Header from './components/mylayout/Header';
-import Todos from './components/Todos';
-import AddTodo from './components/AddTodo';
 import About from './components/Pages/About'
-// import ProtoTypes from 'prop-types'
-// import { v4 as uuidv4 } from 'uuid';
-import axios from 'axios';
+import TodoPage from './pages/TodoPage';
+import Homepage from './pages/Homepage';
+
 
 class App extends Component{
-    state= {
-        todos: []
-    }
-
-    componentDidMount(){
-        axios.get('https://jsonplaceholder.typicode.com/todos?_limit=7')
-            .then(res=> this.setState({todos: res.data}))
-    }
-
-    // Toggle complete
-    markComplete = (id) =>{
-        this.setState({todos: this.state.todos.map((todo)=>{
-            if(todo.id === id){
-                todo.completed = !todo.completed
-            }
-            return todo;
-        })});
-    }
-
-    // DELETE Btn and Using spread operator to filter through Todo items
-    delTodo = (id) =>{
-        axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
-            .then(res => this.setState({todos: [...this.state.todos.filter((todo) =>{
-                return todo.id !== id
-            })]}));
-        
-        
-    };
-
-    addTodo = (title) =>{
-        // const newTodo ={
-        //     id: uuidv4(),
-        //     title:title,
-        //     completed: false
-        // }
-        axios.post('https://jsonplaceholder.typicode.com/todos',{
-            title:title,
-            completed: false
-        })
-        .then(res => this.setState({todos:[...this.state.todos,res.data]}));
-    }
-
     render(){
         return(
             <Router>
                 <div className="App">
-                    <div className="container">
-                        <Header />
-
-                        <Route exact path ="/" render={props => (
-                            <React.Fragment>
-                                <AddTodo addTodo ={this.addTodo}/>
-                                <Todos todos={this.state.todos} markComplete= {this.markComplete} delTodo={this.delTodo}/>
-                            </React.Fragment>
-                        )}/>
+                    <Switch>
+                        <Route exact path ="/" component = {Homepage}/>
                         <Route path="/about" component={About}/>
-                        </div>
+                        <Route path="/todo" component={TodoPage}/>
+                    </Switch>
                 </div>
             </Router>
         );

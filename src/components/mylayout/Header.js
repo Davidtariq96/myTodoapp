@@ -4,8 +4,8 @@ import {Link} from 'react-router-dom';
     return (
             <header style={topStyle}>
                 <h1>TodoList</h1>
-
-                <Link style={myLinks} to="/">Home</Link> | <Link style={myLinks} to="/about">About</Link>
+                <Link  style={myLinks} to="/">Home</Link> | &nbsp;
+                <Link style={myLinks} to="/about">About</Link>
             </header>
     )
 }
