@@ -14,6 +14,7 @@ class App extends Component{
         return(
             <Router>
                 <div className="App">
+                    {/* switch tag is used to make sure only one path is loaded at a time */}
                     <Switch>
                         <Route exact path ="/" component = {Homepage}/>
                         <Route path="/about" component={About}/>

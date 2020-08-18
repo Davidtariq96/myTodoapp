@@ -5,10 +5,14 @@ import PropTypes from 'prop-types';
 export class TodoItem extends Component {
     itemStyle = () => {
         return{
-            background: '#f4f4f4',
+            background: '#D3D3D3',
             padding: '10px',
             borderBottom: '1px #ccc dotted',
-            textDecoration: this.props.todo.completed ? 'line-through' : 'none'
+            textDecoration: this.props.todo.completed ? 'line-through' : 'none',
+            minWidth: '100px',
+            maxWidth: '700px',
+            margin:'1rem 1rem',
+            borderRadius:'5px 5px'
         }
     }
     
@@ -34,8 +38,9 @@ const btnStyle= {
     padding: '5px 8px',
     borderRadius: '50%',
     cursor: 'pointer',
+    fontSize: '10px',
     float: 'right',
-    margin: '0 1rem'
+    // margin: '0 1'
 
 }
 

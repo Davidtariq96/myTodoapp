@@ -10,10 +10,11 @@ export class Error extends Component {
                     boxShadow: "0px 0px 5px rgba(0,0,0,.2)",
                     borderRadius: "5px",
                     color: "red",
-                    position: 'fixed',
+                    // position: 'fixed',
                     bottom: '10px',
                     width: '300px',
                     display:"flex",
+                    margin:"0 auto",
                     justifyContent:"space-between",
                     alignItems:"center"
                 }}

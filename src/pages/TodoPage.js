@@ -2,26 +2,59 @@
 // import logo from './logo.svg';
 
 import React, {Component} from 'react';
-import{BrowserRouter as Router} from 'react-router-dom';
+// import{BrowserRouter as Router} from 'react-router-dom';
 import Header from '../components/mylayout/Header';
 import Todos from '../components/Todos';
 import AddTodo from '../components/AddTodo';
-import About from '../components/Pages/About'
+// import About from '../components/Pages/About'
 // import ProtoTypes from 'prop-types'
 import { v4 as uuidv4 } from 'uuid';
-import axios from 'axios';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+// import axios from 'axios';
 import Error from '../components/Error';
 
 class TodoPage extends Component{
     state= {
-        todos: [],
+        todos: [
+            {
+                id: uuidv4(),
+                title: 'Launch date with girlfriend',
+                completed: false
+            },
+            {
+                id: uuidv4(),
+                title: 'Seeing a movie at the cinema',
+                completed: true
+            },
+            {
+                id: uuidv4(),
+                title: 'Attending a friend weeding',
+                completed: false
+            },
+            {
+                id: uuidv4(),
+                title: 'going to the market today',
+                completed: false
+            },
+            {
+                id: uuidv4(),
+                title: 'football practice',
+                completed: true
+            },
+        ],
         showError: false
     }
 
-    componentDidMount(){
-        axios.get('https://jsonplaceholder.typicode.com/todos?_limit=7')
-            .then(res=> this.setState({todos: res.data}))
-    }
+//    MAKING A REQUEST TO AN API WE USE COMPONENTSDIDMOUNT METHOD
+    
+    // componentDidMount(){
+    //     axios.get('https://jsonplaceholder.typicode.com/todos?_limit=7')
+    //         .then(res=> 
+    //             this.setState({todos: res.data})
+    //             this.setState({todos:[...this.state.todos] })
+    // }
 
     // Toggle complete
     markComplete = (id) =>{
@@ -43,10 +76,11 @@ class TodoPage extends Component{
 
     // DELETE Btn and Using spread operator to filter through Todo items
     delTodo = (id) =>{
-        axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
-            .then(res => this.setState({todos: [...this.state.todos.filter((todo) =>{
+        // axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+            // .then(res => 
+                this.setState({todos: [...this.state.todos.filter((todo) =>{
                 return todo.id !== id
-            })]}));  
+            })]});  
     };
 
     componentDidUpdate(pP,Ps,snapshot){
@@ -57,13 +91,23 @@ class TodoPage extends Component{
         if(title.length <= 0){
             const newState = {
                 ...this.state,
-                showError: true
+                // showError: true,
             }
-            this.setState(newState);
-            setTimeout(this.closeError,6000)
+
+            // const MySwal = withReactContent(Swal)
+            // this.setState();
+            Swal.fire({
+                icon: 'error',
+                timerProgressBar: true,
+                showConfirmButton: false,
+                text: 'please input a valid todo!',
+                toast: true,
+                position: 'top-end',
+                timer: 5000
+              })
         }else{
             let newTodo = {
-                title,
+                title:title,
                 completed:false,
                 id: uuidv4()
             }

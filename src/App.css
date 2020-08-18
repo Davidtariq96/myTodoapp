@@ -50,20 +50,23 @@ a{
   color: #333;
   text-decoration: none;
 }
-.container{
-  /* padding: 0 1rem; */
-}
+
 
 .btn{
   display: inline-block;
   padding: 10px 15px;
-  background: #555;
+  background: #1867dd;
   color: #ffff;
   cursor: pointer;
   border: none;
   margin-top: 2rem ;
+  margin-left: 1rem;
+  border-radius: 5px;
 }
 
 .btn:hover{
   background: rgb(194, 191, 191);
+}
+.links:hover{
+  color: gray;
 }
